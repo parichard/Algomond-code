@@ -20,20 +20,14 @@ def wait_for_confirmation(client, txid):
     print('Transaction confirmed in round', txinfo.get('confirmed-round'))
     return txinfo
 
-
-# Setup HTTP client w/guest key provided by PureStake
-algod_address = 'https://mainnet-algorand.api.purestake.io/ps2'
-algod_token = ""
-headers = {
-    "X-API-Key": "#insert API key here", #insert API key here
-}
+algod_address = 'https://node.algoexplorerapi.io'
 
 # Initalize throw-away account for this example - check that is has funds before running script
-mnemonic_phrase = 'cloth rain enhance top raccoon wrestle vicious float iron evoke trip insane extra tell market quote crack roof measure bacon pattern force essay able nest';
+mnemonic_phrase = '' #insert mnemonic here
 account_private_key = mnemonic.to_private_key(mnemonic_phrase)
 account_public_key = mnemonic.to_public_key(mnemonic_phrase)
 
-algodclient = algod.AlgodClient(algod_token, algod_address, headers)
+algodclient = algod.AlgodClient('', algod_address, '')
 
 with open('./staking_algomond.data', 'rb') as filehandle:
     sorteddicti = pickle.load(filehandle)
@@ -49,7 +43,7 @@ for entry in sorteddicti:
     fee = params.min_fee
     #adjust the send amount value here
     send_amount = entry[1]
-    index = 226701642 #yieldly asset ID
+    index = 871370770 #MOND asset ID
 
     existing_account = account_public_key
     send_to_address = entry[0]
